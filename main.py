@@ -40,10 +40,11 @@ for i in range(0, 10):
             while get_pixel_in_center() == color_before:
                 pass
             end = time.time_ns()
+            time.sleep(0.4)
             pyautogui.hotkey('alt', 'f4')
             exec_time = end - start
             name = program.split("\\")[1].split(".")[0]
             print(name + ": " + str(exec_time) + " ns")
 
     print()
-    time.sleep(5)
+    time.sleep(3)

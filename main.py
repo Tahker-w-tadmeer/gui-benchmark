@@ -10,10 +10,8 @@ def open_program_in_location(location):
 
 
 def go_to_desktop():
-    time.sleep(1)
+    time.sleep(2)
     pyautogui.hotkey('win', 'd')
-    pyautogui.moveTo(1, 1)
-    pyautogui.click()
 
 
 def get_pixel_in_center():

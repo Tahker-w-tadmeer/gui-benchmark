@@ -15,7 +15,6 @@ def go_to_desktop():
 
 
 def get_pixel_in_center():
-    pyautogui.moveTo(monitor.width // 2, monitor.height // 2)
     return pyautogui.screenshot().getpixel((monitor.width // 2, monitor.height // 2))
 
 

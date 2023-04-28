@@ -1,7 +1,6 @@
 import pyautogui
 from screeninfo import get_monitors
 import glob
-from calculate_time import CalculateTime
 import time
 
 
@@ -15,6 +14,11 @@ def go_to_desktop():
     pyautogui.hotkey('win', 'd')
     pyautogui.moveTo(1, 1)
     pyautogui.click()
+
+
+def get_pixel_in_center():
+    pyautogui.moveTo(monitor.width // 2, monitor.height // 2)
+    return pyautogui.screenshot().getpixel((monitor.width // 2, monitor.height // 2))
 
 
 monitor = get_monitors()[0]
@@ -31,7 +35,12 @@ for program in program_icons:
     )
     if position is not None:
         position = pyautogui.center(position)
-        calc = CalculateTime(lambda: open_program_in_location(position))
-        exec_time = calc.execute()
+        color_before = get_pixel_in_center()
+        start = time.time_ns()
+        open_program_in_location(position)
+        while get_pixel_in_center() == color_before:
+            pass
+        end = time.time_ns()
+        exec_time = end - start
         name = program.split("\\")[1].split(".")[0]
-        print(name + ": " + str(exec_time) + "ns")
+        print(name + ": " + str(exec_time) + " ns")
